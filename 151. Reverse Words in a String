@@ -1,0 +1,18 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+        stringstream iss(s);
+        string word;
+        string ans="";
+        while(iss>>word)
+        {
+           string str=word;
+           reverse(str.begin(),str.end());
+           ans=ans+str+" ";
+        }
+        ans.pop_back();
+        reverse(ans.begin(),ans.end());
+        return ans;
+        
+    }
+};
