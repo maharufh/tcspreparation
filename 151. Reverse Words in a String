@@ -16,3 +16,60 @@ public:
         
     }
 };
+// solution 2
+// #include <algorithm>
+
+class Solution {
+public:
+    string reverseWords(string s) {
+        // Reverse the entire string
+        reverse(s.begin(), s.end());
+        
+        int start = 0;
+        for (int i = 0; i < s.length(); ++i) {
+            if (s[i] != ' ' && (i == 0 || s[i - 1] == ' ')) {
+                start = i; // Start of a word
+            }
+            if (s[i] != ' ' && (i == s.length() - 1 || s[i + 1] == ' ')) {
+                // Reverse the word
+                reverse(s.begin() + start, s.begin() + i + 1);
+            }
+        }
+        
+        // Remove extra spaces
+        int i = 0, j = 0;
+        while (j < s.length()) {
+            while (j < s.length() && s[j] == ' ') ++j;
+            while (j < s.length() && s[j] != ' ') s[i++] = s[j++];
+            while (j < s.length() && s[j] == ' ') ++j;
+            if (j < s.length()) s[i++] = ' ';
+        }
+        s.resize(i); // Resize the string to remove extra characters
+        
+        return s;
+    }
+};
+//solution 3
+class Solution {
+public:
+    string reverseWords(string s) {
+        stringstream nn(s);
+        vector<string> arr;
+          string temp;
+
+        // Split the string by spaces
+        while (nn >> temp) {
+            arr.push_back(temp);
+        }
+
+        // Reconstruct the string by appending words in reverse order
+         string reverse;
+        for(int i = arr.size() - 1; i >= 0; i--) {
+            reverse += arr[i];
+            if(i > 0) // Add space if it's not the last word
+                reverse += " ";
+        }
+        
+        return reverse;
+    }
+};
